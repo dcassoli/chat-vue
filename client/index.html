@@ -1,0 +1,32 @@
+<div id="app" class="container">
+
+    <h3 class="text-center">Chat simples utilizando Websocket(Ratchet), Vue.JS e PHP</h3>
+
+    <div id="messages">
+        <div class="col s12">
+            <ul class="list-unstyled" v-cloak>
+                <li v-for="message in messages">
+                    <span class="date" v-if="message.date">[{{ message.date }}]</span>
+                    <span class="name" v-if="message.user">{{ message.user }}:</span>
+                    <span class="text" :style="{ color: message.color }">
+                        {{ message.text }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-sm-3">
+            <input type="text" class="form-control" placeholder="Usuário" v-model="user">
+        </div>
+
+        <div class="col-12 col-sm-9">
+            <input type="text" class="form-control" placeholder="Mensagem" v-model="text"
+                   @keyup.enter="sendMessage">
+        </div>
+
+    </div>
+
+</div>
