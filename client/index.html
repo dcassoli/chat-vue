@@ -19,12 +19,14 @@
     <div class="row">
 
         <div class="col-12 col-sm-3">
+            <label for="user">Usuário:</label></br>
             <input type="text" class="form-control" placeholder="Usuário" v-model="user">
         </div>
 
         <div class="col-12 col-sm-9">
-            <input type="text" class="form-control" placeholder="Mensagem" v-model="text"
-                   @keyup.enter="sendMessage">
+            <label for="text">Mensagem:</label></br>
+            <textarea type="text" class="form-control" placeholder="Mensagem" v-model="text"
+                   @keyup.enter="sendMessage"></textarea>
         </div>
 
     </div>
