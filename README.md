@@ -19,3 +19,24 @@ Pronto, agora nosso servidor de Websocket foi iniciado.
 Para executar o projeto, rodar a URL:
 localhost:8080
 
+========================================================
+
+Simple chat using Websocket, Vue.JS and PHP
+
+Websocket is a protocol that allows us to open two-way communication with the server using a single Transmission Control Protocol (TCP) socket through the browser. Therefore, both client and server can send information to each other at any time.
+
+On the client side we will use Vue.JS to make it easier to build the chat interface, as well as to maintain a more organized code.
+
+On the server side we will use Ratchet which is a PHP library that allows us to build a websocket server in an uncomplicated way.
+
+In the server directory: Just run "composer install" on the terminal.
+
+Now we need to run this file to start our Websocket server. For this you need to go to the terminal, navigate to its folder and execute the command below:
+
+$ php server.php
+
+Okay, now our Websocket server has started.
+
+To run the project, run the URL: 
+localhost: 8080
+
