@@ -12,7 +12,7 @@ var app = new Vue({
     },
 
     // Quando iniciado o aplicativo
-    created: function() {
+    created() {
         // Inicia a conexão com o websocket
         this.connect();
     },
@@ -21,16 +21,14 @@ var app = new Vue({
     methods: {
 
         // Método responsável por iniciar conexão com o websocket
-        connect: function(onOpen) {
-
-            var self = this;
+        connect(onOpen) {
 
             // Conectando
-            self.ws = new WebSocket('ws://localhost:8282');
+            this.ws = new WebSocket('ws://localhost:8282');
 
             // Evento que será chamado ao abrir conexão
-            self.ws.onopen = function() {
-                self.addSuccessNotification('Conectado');
+            this.ws.onopen = function() {
+                this.addSuccessNotification('Conectado');
                 // Se houver método de retorno
                 if (onOpen) {
                     onOpen();
@@ -38,54 +36,52 @@ var app = new Vue({
             };
 
             // Evento que será chamado quando houver erro na conexão
-            self.ws.onerror = function() {
-                self.addErrorNotification('Não foi possível conectar-se ao servidor');
+            this.ws.onerror = function() {
+                this.addErrorNotification('Não foi possível conectar-se ao servidor');
             };
 
             // Evento que será chamado quando recebido dados do servidor
-            self.ws.onmessage = function(e) {
-                self.addMessage(JSON.parse(e.data));
+            this.ws.onmessage = function(e) {
+                this.addMessage(JSON.parse(e.data));
             };
 
         },
 
         // Método responsável por adicionar uma mensagem de usuário
-        addMessage: function(data) {
+        addMessage(data) {
             this.messages.push(data);
             this.scrollDown();
         },
 
         // Método responsável por adicionar uma notificação de sucesso
-        addSuccessNotification: function(text) {
+        addSuccessNotification(text) {
             this.addMessage({color: 'green', text: text});
         },
 
         // Método responsável por adicionar uma notificação de erro
-        addErrorNotification: function(text) {
+        addErrorNotification(text) {
             this.addMessage({color: 'red', text: text});
         },
 
         // Método responsável por enviar uma mensagem
-        sendMessage: function() {
-
-            var self = this;
+        sendMessage() {
 
             // Se não houver o texto da mensagem ou o nome de usuário
-            if (!self.text || !self.user) {
+            if (!this.text || !this.user) {
                 // Saindo do método
                 return;
             }
 
             // Se a conexão não estiver aberta
-            if (self.ws.readyState !== self.ws.OPEN) {
+            if (this.ws.readyState !== this.ws.OPEN) {
 
                 // Exibindo notificação de erro
-                self.addErrorNotification('Problemas na conexão. Tentando reconectar...');
+                this.addErrorNotification('Problemas na conexão. Tentando reconectar...');
 
                 // Tentando conectar novamente e caso tenha sucesso
                 // envia a mensagem novamente
-                self.connect(function() {
-                    self.sendMessage();
+                this.connect(() => {
+                    this.sendMessage();
                 });
 
                 // Saindo do método
@@ -93,18 +89,18 @@ var app = new Vue({
             }
 
             // Envia os dados para o servidor através do websocket
-            self.ws.send(JSON.stringify({
-                user: self.user,
-                text: self.text,
+            this.ws.send(JSON.stringify({
+                user: this.user,
+                text: this.text,
             }));
 
             // Limpando texto da mensagem
-            self.text = null;
+            this.text = null;
 
         },
 
         // Método responsável por "rolar" a scroll do chat para baixo
-        scrollDown: function() {
+        scrollDown() {
             var container = this.$el.querySelector('#messages');
             container.scrollTop = container.scrollHeight;
         },
