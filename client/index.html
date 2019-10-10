@@ -1,34 +1,45 @@
-<div id="app" class="container">
-
-    <h3 class="text-center">Chat simples utilizando Websocket(Ratchet), Vue.JS e PHP</h3>
-
-    <div id="messages">
-        <div class="col s12">
-            <ul class="list-unstyled" v-cloak>
-                <li v-for="message in messages">
-                    <span class="date" v-if="message.date">[{{ message.date }}]</span>
-                    <span class="name" v-if="message.user">{{ message.user }}:</span>
-                    <span class="text" :style="{ color: message.color }">
-                        {{ message.text }}
-                    </span>
-                </li>
-            </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat do DJ Cassoli</title>
+</head>
+<body>
+    <div id="app" class="container">
+    
+        <h3 class="text-center">Chat simples utilizando Websocket(Ratchet), Vue.JS e PHP</h3>
+    
+        <div id="messages">
+            <div class="col s12">
+                <ul class="list-unstyled" v-cloak>
+                    <li v-for="message in messages">
+                        <span class="date" v-if="message.date">[{{ message.date }}]</span>
+                        <span class="name" v-if="message.user">{{ message.user }}:</span>
+                        <span class="text" :style="{ color: message.color }">
+                            {{ message.text }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
+    
+        <div class="row">
+    
+            <div class="col-12 col-sm-3">
+                <label for="user">Usuário:</label></br>
+                <input type="text" class="form-control" placeholder="Usuário" v-model="user">
+            </div>
+    
+            <div class="col-12 col-sm-9">
+                <label for="text">Mensagem:</label></br>
+                <textarea type="text" class="form-control" placeholder="Mensagem" v-model="text"
+                       @keyup.enter="sendMessage"></textarea>
+            </div>
+    
+        </div>
+    
     </div>
-
-    <div class="row">
-
-        <div class="col-12 col-sm-3">
-            <label for="user">Usuário:</label></br>
-            <input type="text" class="form-control" placeholder="Usuário" v-model="user">
-        </div>
-
-        <div class="col-12 col-sm-9">
-            <label for="text">Mensagem:</label></br>
-            <textarea type="text" class="form-control" placeholder="Mensagem" v-model="text"
-                   @keyup.enter="sendMessage"></textarea>
-        </div>
-
-    </div>
-
-</div>
+</body>
+</html>
